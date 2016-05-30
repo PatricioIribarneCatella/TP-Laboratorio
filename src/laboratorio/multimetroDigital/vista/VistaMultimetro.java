@@ -75,7 +75,7 @@ public class VistaMultimetro implements Vista {
 		BackgroundFill fondoDeColorVoltimetro = new BackgroundFill(Color.GREEN, new CornerRadii(3), new Insets(0.0,0.0,0.0,0.0));
 		etiquetaVoltimetro.setBackground(new Background(fondoDeColorVoltimetro));
 		
-		this.medicionVoltimetro = new Label(this.modelo.getVoltaje());
+		this.medicionVoltimetro = new Label(this.modelo.getTension());
 		this.medicionVoltimetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
 		this.medicionVoltimetro.setTextFill(Color.BLACK);
 		
@@ -92,7 +92,7 @@ public class VistaMultimetro implements Vista {
 		BackgroundFill fondoDeColorAmperimetro = new BackgroundFill(Color.GREEN, new CornerRadii(3), new Insets(0.0,0.0,0.0,0.0));
 		etiquetaAmperimetro.setBackground(new Background(fondoDeColorAmperimetro));
 		
-		this.medicionAmperimetro = new Label(this.modelo.getAmperaje());
+		this.medicionAmperimetro = new Label(this.modelo.getCorriente());
 		this.medicionAmperimetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
 		this.medicionAmperimetro.setTextFill(Color.BLACK);
 		

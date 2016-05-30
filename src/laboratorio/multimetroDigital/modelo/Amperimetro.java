@@ -9,7 +9,7 @@ public class Amperimetro {
 		this.amperaje = 0;
 	}
 	
-	public String getAmperaje() {
+	public String getCorriente() {
 		return Float.toString(this.amperaje);
 	}
 }

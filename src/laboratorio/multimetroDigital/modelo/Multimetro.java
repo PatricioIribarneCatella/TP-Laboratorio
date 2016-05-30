@@ -13,12 +13,12 @@ public class Multimetro {
 		this.ohmetro = new Ohmetro();
 	}
 	
-	public String getVoltaje() {
-		return this.voltimetro.getVoltaje();
+	public String getTension() {
+		return this.voltimetro.getTension();
 	}
 
-	public String getAmperaje() {
-		return this.amperimetro.getAmperaje();
+	public String getCorriente() {
+		return this.amperimetro.getCorriente();
 	}
 
 	public String getResistencia() {

@@ -9,7 +9,7 @@ public class Voltimetro {
 		this.voltaje = 0;
 	}
 	
-	public String getVoltaje() {
+	public String getTension() {
 		return Float.toString(this.voltaje);
 	}
 }
