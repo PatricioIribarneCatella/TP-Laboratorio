@@ -25,7 +25,6 @@ public class VistaMultimetro implements Vista {
 	private Scene escena;
 	private BorderPane contenedor;
 	private Label medicionVoltimetro;
-	private Label medicionAmperimetro;
 	private Label medicionOhmetro;
 
 	public VistaMultimetro(Vista vistaAnterior) {
@@ -83,23 +82,6 @@ public class VistaMultimetro implements Vista {
 		
 		contenedorCentral.add(etiquetaVoltimetro, 0, 0);
 		
-		/*Amperímetro*/
-		
-		Label etiquetaAmperimetro = new Label("Amperímetro (Ampere)");
-		etiquetaAmperimetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		etiquetaAmperimetro.setTextFill(Color.WHITE);
-		
-		BackgroundFill fondoDeColorAmperimetro = new BackgroundFill(Color.GREEN, new CornerRadii(3), new Insets(0.0,0.0,0.0,0.0));
-		etiquetaAmperimetro.setBackground(new Background(fondoDeColorAmperimetro));
-		
-		this.medicionAmperimetro = new Label(this.modelo.getCorriente());
-		this.medicionAmperimetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
-		this.medicionAmperimetro.setTextFill(Color.BLACK);
-		
-		contenedorCentral.add(this.medicionAmperimetro, 1, 1);
-		
-		contenedorCentral.add(etiquetaAmperimetro, 0, 1);
-		
 		/*Ohmetro*/
 		
 		Label etiquetaOhmetro = new Label("Ohmetro (Ohm)");
@@ -113,9 +95,9 @@ public class VistaMultimetro implements Vista {
 		this.medicionOhmetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
 		this.medicionOhmetro.setTextFill(Color.BLACK);
 		
-		contenedorCentral.add(this.medicionOhmetro, 1, 2);
+		contenedorCentral.add(this.medicionOhmetro, 1, 1);
 		
-		contenedorCentral.add(etiquetaOhmetro, 0, 2);
+		contenedorCentral.add(etiquetaOhmetro, 0, 1);
 		
 		this.contenedor.setCenter(contenedorCentral);
 	}
