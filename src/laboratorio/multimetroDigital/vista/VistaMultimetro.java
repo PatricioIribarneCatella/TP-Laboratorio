@@ -38,6 +38,7 @@ public class VistaMultimetro implements Vista, Observer {
 		this.arduino = new PanamaHitek_Arduino();
 		this.vistaAnterior = vistaAnterior;
 		this.stage = vistaAnterior.getStage();
+		this.modelo.addObserver(this);
 		this.initialize();
 	}
 
