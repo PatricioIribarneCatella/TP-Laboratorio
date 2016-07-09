@@ -1,5 +1,8 @@
 package laboratorio.multimetroDigital.vista;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import com.panamahitek.PanamaHitek_Arduino;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +21,7 @@ import javafx.stage.Stage;
 import laboratorio.multimetroDigital.manejadores.BotonVolverEventHandler;
 import laboratorio.multimetroDigital.modelo.Multimetro;
 
-public class VistaMultimetro implements Vista {
+public class VistaMultimetro implements Vista, Observer {
 
 	private Vista vistaAnterior;
 	private Stage stage;
@@ -156,5 +159,12 @@ public class VistaMultimetro implements Vista {
 	@Override
 	public Stage getStage() {
 		return this.stage;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		this.medicionVoltimetro.setText(this.modelo.getTension());
+		this.medicionOhmetro.setText(this.modelo.getResistencia());
 	}
 }

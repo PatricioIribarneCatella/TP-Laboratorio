@@ -1,6 +1,8 @@
 package laboratorio.multimetroDigital.modelo;
 
-public class Multimetro {
+import java.util.Observable;
+
+public class Multimetro extends Observable {
 
 	private Voltimetro voltimetro;
 	private Ohmetro ohmetro;
@@ -26,5 +28,7 @@ public class Multimetro {
 		} else {
 			this.voltimetro.setValor(valor);
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 }
