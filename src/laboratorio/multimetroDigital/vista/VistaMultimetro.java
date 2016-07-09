@@ -1,5 +1,6 @@
 package laboratorio.multimetroDigital.vista;
 
+import com.panamahitek.PanamaHitek_Arduino;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,17 +27,27 @@ public class VistaMultimetro implements Vista {
 	private BorderPane contenedor;
 	private Label medicionVoltimetro;
 	private Label medicionOhmetro;
+	private PanamaHitek_Arduino arduino;
 
 	public VistaMultimetro(Vista vistaAnterior) {
 		
 		this.modelo = new Multimetro();
+		this.arduino = new PanamaHitek_Arduino();
 		this.vistaAnterior = vistaAnterior;
 		this.stage = vistaAnterior.getStage();
 		this.initialize();
 	}
 
 	private void initialize() {
-
+		
+		try {
+			this.arduino.arduinoRX("COM3", 2000, e->{
+				this.modelo.guardarValor(this.arduino.printMessage());
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		this.contenedor = new BorderPane();
 		
 		this.setContenedorPrincipal();

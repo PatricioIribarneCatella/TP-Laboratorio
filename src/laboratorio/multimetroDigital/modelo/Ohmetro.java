@@ -12,4 +12,8 @@ public class Ohmetro {
 	public String getResistencia() {
 		return Float.toString(this.resistencia);
 	}
+
+	public void setValor(String valor) {
+		this.resistencia = Float.parseFloat(valor);
+	}
 }
