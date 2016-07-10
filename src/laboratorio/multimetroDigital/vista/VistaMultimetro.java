@@ -2,8 +2,8 @@ package laboratorio.multimetroDigital.vista;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import com.panamahitek.PanamaHitek_Arduino;
+import gnu.io.SerialPortEventListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -44,10 +44,12 @@ public class VistaMultimetro implements Vista, Observer {
 
 	private void initialize() {
 		
+		SerialPortEventListener evento = e->{
+			this.modelo.guardarValor(this.arduino.printMessage());
+		};
+		
 		try {
-			this.arduino.arduinoRX("COM3", 2000, e->{
-				this.modelo.guardarValor(this.arduino.printMessage());
-			});
+			this.arduino.arduinoRX("COM3", 2000, evento);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
