@@ -1,9 +1,14 @@
 package laboratorio.multimetroDigital.vista;
 
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Observable;
 import java.util.Observer;
-import com.panamahitek.PanamaHitek_Arduino;
-import gnu.io.SerialPortEventListener;
+
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import gnu.io.SerialPortEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,13 +34,18 @@ public class VistaMultimetro implements Vista, Observer {
 	private Scene escena;
 	private BorderPane contenedor;
 	private Label medicionVoltimetro;
-	private Label medicionOhmetro;
-	private PanamaHitek_Arduino arduino;
-
+	private Label medicionOhmetro; 
+	
+	/*Variables de conexión*/
+	private SerialPort serialPort;
+	private static final int TIME_OUT = 2000;
+	private static final int DATA_RATE = 4800;
+	private final String PUERTO = "COM3";
+	private InputStream input;
+	
 	public VistaMultimetro(Vista vistaAnterior) {
 		
 		this.modelo = new Multimetro();
-		this.arduino = new PanamaHitek_Arduino();
 		this.vistaAnterior = vistaAnterior;
 		this.stage = vistaAnterior.getStage();
 		this.modelo.addObserver(this);
@@ -43,16 +53,6 @@ public class VistaMultimetro implements Vista, Observer {
 	}
 
 	private void initialize() {
-		
-		SerialPortEventListener evento = e->{
-			this.modelo.guardarValor(this.arduino.printMessage());
-		};
-		
-		try {
-			this.arduino.arduinoRX("COM3", 2000, evento);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		this.contenedor = new BorderPane();
 		
@@ -63,8 +63,58 @@ public class VistaMultimetro implements Vista, Observer {
 		this.setCaracteristicasAlContenedorPrincipal();
 		
 		this.escena = new Scene(this.contenedor, 350, 600);
+		
+		this.setConexion();
 	}
 
+	private void setConexion() {
+		
+		CommPortIdentifier iDPuerto = null;
+		boolean encontrado = false;
+		@SuppressWarnings("unchecked")
+		Enumeration<CommPortIdentifier> puertos = CommPortIdentifier.getPortIdentifiers();
+		
+		while (puertos.hasMoreElements() && !encontrado) {
+			
+			CommPortIdentifier iDPuertoActual = puertos.nextElement();
+			if (PUERTO.equals(iDPuertoActual.getName())) {
+				iDPuerto = iDPuertoActual;
+				encontrado = true;
+			}
+		}
+		
+		if (!encontrado) {
+			System.exit(1);
+		}
+	
+		try {
+			
+			this.serialPort = (SerialPort)iDPuerto.open(this.getClass().getName(), TIME_OUT);
+			this.serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+			
+			this.input = this.serialPort.getInputStream();
+			
+			this.serialPort.addEventListener(e->{
+				if (e.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+					String s = "";
+					try {
+						int dato = this.input.read();
+						while (this.input.available() > 0 && (char)dato != '\n') {
+							dato = this.input.read();
+							s = s + (char)dato;
+						}
+						this.modelo.guardarValor(s);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void setImagenDeFondo() {
 		// Si le queremos poner una imagen copada de fondo
 	}
