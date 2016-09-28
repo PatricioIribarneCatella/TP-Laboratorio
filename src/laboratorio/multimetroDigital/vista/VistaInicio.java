@@ -126,7 +126,7 @@ public class VistaInicio implements Vista {
 	@Override
 	public void mostrar() {
 	
-		this.stage.setTitle("Multímetro Digital");
+		this.stage.setTitle("Multimetro Digital");
 		this.stage.setScene(this.escena);
 		this.stage.show();
 	}

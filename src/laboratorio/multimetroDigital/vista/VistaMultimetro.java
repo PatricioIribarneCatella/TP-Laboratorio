@@ -36,7 +36,7 @@ public class VistaMultimetro implements Vista, Observer {
 	private Label medicionVoltimetro;
 	private Label medicionOhmetro; 
 	
-	/*Variables de conexión*/
+	/*Variables de conexion*/
 	private SerialPort serialPort;
 	private static final int TIME_OUT = 2000;
 	private static final int DATA_RATE = 4800;
@@ -132,9 +132,9 @@ public class VistaMultimetro implements Vista, Observer {
 		contenedorCentral.setPadding(new Insets(25));
 		contenedorCentral.setAlignment(Pos.CENTER);
 		
-		/*Voltímetro*/
+		/*Voltimetro*/
 		
-		Label etiquetaVoltimetro = new Label("Voltímetro (Volt)");
+		Label etiquetaVoltimetro = new Label("Voltimetro (Volt)");
 		etiquetaVoltimetro.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		etiquetaVoltimetro.setTextFill(Color.WHITE);
 		
@@ -204,7 +204,7 @@ public class VistaMultimetro implements Vista, Observer {
 	@Override
 	public void mostrar() {
 		
-		this.stage.setTitle("Multímetro Digital");
+		this.stage.setTitle("Multimetro Digital");
 		this.stage.setScene(this.escena);
 		this.stage.show();
 	}

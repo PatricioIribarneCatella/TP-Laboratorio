@@ -20,9 +20,6 @@
 	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 	<!-- End of 'Ivy customization -->
 
-	<!-- For those who are behind a proxy you may add the line bellow -->
-	<!-- <setproxy proxyhost="proxy.domain.x.y" proxyport="8080" proxypassword="passwd" proxyuser="userid"/> -->
-
 	<path id="classpath">
 		<fileset dir="${libs}">
 			<include name="*.jar" />
@@ -133,16 +130,16 @@
 		</cobertura-report>
 	</target>
 
-    	<target name="test" depends="compilar.tests.sin.instrumentar">
-        	<junit fork="yes" failureProperty="test.failure" showoutput="true">
-            		<classpath location="${build}" />
-            		<classpath refid="classpath" />
-            		<batchtest todir="${reports.xml.dir}" unless="testcase">
-				<fileset dir="${build}/tests" includes="**/*Test.class" />
-				<formatter type="plain" usefile="false"/>
-            		</batchtest>
-        	</junit>
-    	</target>
+	<target name="test" depends="compilar.tests.sin.instrumentar">
+    	<junit fork="yes" failureProperty="test.failure" showoutput="true">
+        		<classpath location="${build}" />
+        		<classpath refid="classpath" />
+        		<batchtest todir="${reports.xml.dir}" unless="testcase">
+			<fileset dir="${build}/tests" includes="**/*Test.class" />
+			<formatter type="plain" usefile="false"/>
+        		</batchtest>
+    	</junit>
+	</target>
 
 	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
 
@@ -191,7 +188,7 @@
 		</javac>
 	</target>
 
-    	<target name="compilar.paquete.sin.tests" depends="compilar.aplicacion">
+    <target name="compilar.paquete.sin.tests" depends="compilar.aplicacion">
 		<javac srcdir="src" destdir="${build}/classes" debug="no">
 		</javac>
 	</target>
