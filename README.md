@@ -1,4 +1,6 @@
-# TP-Laboratorio
+# TP-Multímetro-Digital
+
+Multímetro Digital (Laboratorio)
 
 ## Compilación y Ejecución
 
