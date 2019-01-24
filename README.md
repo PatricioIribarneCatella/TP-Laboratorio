@@ -2,6 +2,9 @@
 
 Multímetro Digital (Laboratorio)
 
-## Compilación y Ejecución
+### Compilación y Ejecución
 
-$ ant
+```bash
+ $ ant
+```
+
