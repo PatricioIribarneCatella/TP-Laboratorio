@@ -1,6 +1,6 @@
 # TP-Multímetro-Digital
 
-Multímetro Digital (Laboratorio)
+Multímetro Digital (_Laboratorio - FIUBA_)
 
 ### Compilación y Ejecución
 
